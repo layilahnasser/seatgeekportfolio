@@ -1189,3 +1189,8 @@ body[data-page="home"] .footer { background: transparent; border-top: 1px solid 
 @media (prefers-reduced-motion: reduce) { .fp-img img { transition: none; } }
 .fp-sub { max-width: 760px; margin-left: auto; margin-right: auto; line-height: 1.55; }
 body[data-page="home"] .lg { vertical-align: -.22em; margin: 0 .2em; } body[data-page="home"] .lg img { height: 1.3em; }
+
+.sg-pin { padding: 8px 16px 8px 12px; align-items: center; }
+.sg-pt { display: flex; flex-direction: column; line-height: 1.2; text-align: left; } .sg-pt b { font: 800 1rem "Manrope", sans-serif; } .sg-pm { font: 600 .86rem "Manrope", sans-serif; color: var(--sg-gray); } .sg-pin:hover .sg-pm, .sg-pin.is-hot .sg-pm { color: #cfe0ff; }
+@media (max-width: 800px) { .sg-pn { display: inline; } .sg-pin { padding: 6px 10px 6px 8px; gap: 6px; } .sg-pt b { font-size: .74rem; } .sg-pm { font-size: .68rem; } }
+@media (max-width: 800px) { .sg-venue { width: 88%; } }

@@ -133,10 +133,10 @@
       const cover = (p) => (p.hero && (p.hero.src || (p.hero.row && p.hero.row[0] && p.hero.row[0].src))) || "";
       const META = {
         "root-insurance": { badge: ["15", "retention concepts"], big: "18 sessions", small: "12 stakeholders + 6 customers", flag: "Most recent", ai: true, pin: [40, 89] },
-        "usda-acir": { badge: ["3", "recommendations"], big: "15+ interviews", small: "10+ usability sessions", pin: [27, 22] },
-        "instructure-elevated": { badge: ["3", "recommendations"], big: "10 interviews", small: "5 learning barriers", ai: true, pin: [73, 22] },
-        "milk-and-froth": { badge: ["5", "pages designed"], big: "2 designers", small: "Jan–Mar 2026", pin: [13, 55] },
-        "crown-code": { badge: ["4", "core tabs"], big: "Solo", small: "brief to final design", flag: "Solo project", pin: [88, 56] }
+        "usda-acir": { badge: ["3", "recommendations"], big: "15+ interviews", small: "10+ usability sessions", pin: [24, 8] },
+        "instructure-elevated": { badge: ["3", "recommendations"], big: "10 interviews", small: "5 learning barriers", ai: true, pin: [76, 8] },
+        "milk-and-froth": { badge: ["5", "pages designed"], big: "2 designers", small: "Jan–Mar 2026", pin: [18, 55] },
+        "crown-code": { badge: ["4", "core tabs"], big: "Solo", small: "brief to final design", flag: "Solo project", pin: [84, 56] }
       };
       const metaOf = (p) => META[p.id] || { badge: ["", ""], big: p.year || "", small: p.focus || "", pin: [50, 50] };
       const bolt = '<svg viewBox="0 0 12 16" aria-hidden="true"><path d="M7 0L1 9h4l-1 7 7-10H7z" fill="currentColor"/></svg>';
@@ -191,7 +191,7 @@
                 <circle cx="290" cy="300" r="34" fill="none" stroke="#d6393b" stroke-width="2"/><circle cx="290" cy="400" r="34" fill="none" stroke="#d6393b" stroke-width="2"/><circle cx="610" cy="300" r="34" fill="none" stroke="#d6393b" stroke-width="2"/><circle cx="610" cy="400" r="34" fill="none" stroke="#d6393b" stroke-width="2"/>
                 <image href="${esc(sticker)}" x="378" y="288" width="144" height="124" preserveAspectRatio="xMidYMid meet"/>
               </svg>
-              ${P.projects.map((p) => { const m = metaOf(p); return `<a class="sg-pin" href="project.html?p=${esc(p.id)}" data-id="${esc(p.id)}" style="left:${m.pin[0]}%;top:${m.pin[1]}%" aria-label="Open ${esc(plain(p.title))}: ${esc(m.big)}"><i></i><span class="sg-pn">${esc(p.shortTitle || plain(p.title).split(" ")[0].replace(":", ""))}</span> ${esc(m.big)}</a>`; }).join("")}
+              ${P.projects.map((p) => { const m = metaOf(p); return `<a class="sg-pin" href="project.html?p=${esc(p.id)}" data-id="${esc(p.id)}" style="left:${m.pin[0]}%;top:${m.pin[1]}%" aria-label="Open ${esc(plain(p.title))}: ${esc(m.big)}"><i></i><span class="sg-pt"><b>${esc(plain(p.title))}</b><span class="sg-pm">${esc(m.big)}</span></span></a>`; }).join("")}
             </div>
           </section>
 
