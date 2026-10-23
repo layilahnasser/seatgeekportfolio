@@ -113,17 +113,9 @@
           <ul class="fp-chips" aria-label="Suggested questions">${QS.map(([q, k]) => `<li><button type="button" class="fp-chip" data-k="${k}"><span class="fp-sp">${spark}</span>${esc(q)}</button></li>`).join("")}</ul>
           <section class="fp-answer" id="fp-answer" aria-live="polite" tabindex="-1" hidden></section>
 
-          <section class="fp-feat" aria-labelledby="feat-t">
-            <div class="fp-feat-head"><h2 id="feat-t">Featured projects</h2>
-              <div class="fp-arrows"><button type="button" id="fp-prev" aria-label="Previous projects">‹</button><button type="button" id="fp-next" aria-label="Next projects">›</button></div></div>
-            <ul class="fp-cards" id="fp-cards">${P.projects.map((p) => `
-              <li class="fp-card" data-id="${esc(p.id)}">
-                <a class="fp-img" href="project.html?p=${esc(p.id)}" tabindex="-1" aria-hidden="true">${cover(p) ? `<img src="${esc(cover(p))}" alt="" loading="lazy">` : ""}</a>
-                <button type="button" class="fp-save" aria-pressed="false" aria-label="Save ${esc(plain(p.title))}">${heart}</button>
-                <h3><a href="project.html?p=${esc(p.id)}">${t(p.title)}</a></h3>
-                <p>${esc(p.focus)} · ${esc(p.timeline || p.year || "")}</p>
-              </li>`).join("")}</ul>
-            <p class="fp-allrow"><a class="fp-all" href="projects.html">See all projects as a list and map <span aria-hidden="true">→</span></a></p>
+          <section class="fp-embed" aria-labelledby="seat-t">
+            <h2 class="fp-embed-h" id="seat-t">Pick your seat</h2>
+            ${pages.projects().replace(/<aside class="sg-notify"[\s\S]*?<\/aside>/, "")}
           </section>
           <p class="sr-only" id="fp-live" role="status" aria-live="polite"></p>
         </div>`;
@@ -132,9 +124,9 @@
     projects() {
       const cover = (p) => (p.hero && (p.hero.src || (p.hero.row && p.hero.row[0] && p.hero.row[0].src))) || "";
       const META = {
-        "root-insurance": { badge: ["15", "retention concepts"], big: "18 sessions", small: "12 stakeholders + 6 customers", flag: "Most recent", ai: true, pin: [40, 89] },
-        "usda-acir": { badge: ["3", "recommendations"], big: "15+ interviews", small: "10+ usability sessions", pin: [24, 8] },
-        "instructure-elevated": { badge: ["3", "recommendations"], big: "10 interviews", small: "5 learning barriers", ai: true, pin: [76, 8] },
+        "root-insurance": { badge: ["15", "Figma concepts"], big: "18 sessions", small: "12 stakeholders + 6 customers", flag: "Most recent", ai: true, pin: [40, 89] },
+        "usda-acir": { badge: ["3", "recommendations"], big: "15+ interviews", small: "10+ usability sessions", pin: [26, 6] },
+        "instructure-elevated": { badge: ["3", "recommendations"], big: "10 interviews", small: "5 learning barriers", ai: true, pin: [70, 6] },
         "milk-and-froth": { badge: ["5", "pages designed"], big: "2 designers", small: "Jan–Mar 2026", pin: [18, 55] },
         "crown-code": { badge: ["4", "core tabs"], big: "Solo", small: "brief to final design", flag: "Solo project", pin: [84, 56] }
       };
@@ -143,7 +135,7 @@
       const row = (p) => {
         const m = metaOf(p);
         return `
-        <li class="sg-row" data-id="${esc(p.id)}" data-layout="${esc(p.layout || "design")}" data-ai="${m.ai ? 1 : 0}" data-year="${esc(p.year || "")}">
+        <li class="sg-row" data-id="${esc(p.id)}" data-layout="${esc(p.layout || "design")}" data-both="${p.id === "root-insurance" ? 1 : 0}" data-ai="${m.ai ? 1 : 0}" data-year="${esc(p.year || "")}">
           <span class="sg-thumb" aria-hidden="true">${cover(p) ? `<img src="${esc(cover(p))}" alt="" loading="lazy">` : ""}<i class="sg-m">LC</i></span>
           <div class="sg-main">
             <h2 class="sg-t"><a href="project.html?p=${esc(p.id)}">${t(p.title)}</a></h2>
@@ -674,25 +666,17 @@
       else if (hit) show(ANS[hit[0]]);
       else show({ t: `I don’t have a written answer for that yet. Try one of the suggestions above, or <a href="projects.html">browse all the projects</a>, or <a href="contact.html">ask me directly</a>.`, ids: [] }, "No match");
     });
-    // carousel
-    const row = document.getElementById("fp-cards"), step = () => (row.firstElementChild ? row.firstElementChild.getBoundingClientRect().width + 20 : 300);
-    const rm = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-    document.getElementById("fp-prev").addEventListener("click", () => row.scrollBy({ left: -step(), behavior: rm() ? "auto" : "smooth" }));
-    document.getElementById("fp-next").addEventListener("click", () => row.scrollBy({ left: step(), behavior: rm() ? "auto" : "smooth" }));
-    // saves
-    let saved = {}; try { saved = JSON.parse(localStorage.getItem("sg-saved") || "{}"); } catch (e) {}
-    row.querySelectorAll(".fp-card").forEach((c) => { const b = c.querySelector(".fp-save"), id = c.dataset.id; const paint = () => b.setAttribute("aria-pressed", String(!!saved[id])); paint(); b.addEventListener("click", () => { saved[id] = !saved[id]; try { localStorage.setItem("sg-saved", JSON.stringify(saved)); } catch (e) {} paint(); live.textContent = saved[id] ? "Saved" : "Removed from saved"; }); });
   }
 
-  if (page === "projects") {
+  if (page === "projects" || page === "home") {
     const rows = document.getElementById("rows"), empty = document.getElementById("sg-empty"), cnt = document.getElementById("sg-count");
     const chips = [...document.querySelectorAll(".sg-chip")];
     let f = "all";
-    const qf = new URLSearchParams(location.search).get("f"); if (["research", "design", "ai"].includes(qf)) f = qf;
+    const qf = page === "projects" ? new URLSearchParams(location.search).get("f") : null; if (["research", "design", "ai"].includes(qf)) f = qf;
     const apply = () => {
       let n = 0;
       [...rows.children].forEach((li) => {
-        const show = f === "all" || (f === "ai" ? li.dataset.ai === "1" : li.dataset.layout === f);
+        const show = f === "all" || (f === "ai" ? li.dataset.ai === "1" : (li.dataset.layout === f || li.dataset.both === "1"));
         li.hidden = !show; if (show) n++;
         const pin = document.querySelector(`.sg-pin[data-id="${li.dataset.id}"]`); if (pin) pin.hidden = !show;
       });
@@ -720,10 +704,13 @@
     // mobile map toggle
     const mapBtn = document.getElementById("sg-mapbtn"), app = document.querySelector(".sg-app");
     mapBtn.addEventListener("click", () => { const on = !app.classList.contains("show-map"); app.classList.toggle("show-map", on); mapBtn.setAttribute("aria-pressed", String(on)); mapBtn.textContent = on ? "List" : "Map"; });
-    // notify card
-    const nt = document.getElementById("sg-notify"); let gone = false; try { gone = sessionStorage.getItem("sg-notify") === "1"; } catch (e) {}
-    if (!gone) setTimeout(() => (nt.hidden = false), 1200);
-    document.getElementById("sg-x").addEventListener("click", () => { nt.hidden = true; try { sessionStorage.setItem("sg-notify", "1"); } catch (e) {} });
+    // notify card (list-and-map page only)
+    const nt = document.getElementById("sg-notify");
+    if (nt) {
+      let gone = false; try { gone = sessionStorage.getItem("sg-notify") === "1"; } catch (e) {}
+      if (!gone) setTimeout(() => (nt.hidden = false), 1200);
+      document.getElementById("sg-x").addEventListener("click", () => { nt.hidden = true; try { sessionStorage.setItem("sg-notify", "1"); } catch (e) {} });
+    }
     apply();
   }
 

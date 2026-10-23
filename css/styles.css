@@ -1194,3 +1194,13 @@ body[data-page="home"] .lg { vertical-align: -.22em; margin: 0 .2em; } body[data
 .sg-pt { display: flex; flex-direction: column; line-height: 1.2; text-align: left; } .sg-pt b { font: 800 1rem "Manrope", sans-serif; } .sg-pm { font: 600 .86rem "Manrope", sans-serif; color: var(--sg-gray); } .sg-pin:hover .sg-pm, .sg-pin.is-hot .sg-pm { color: #cfe0ff; }
 @media (max-width: 800px) { .sg-pn { display: inline; } .sg-pin { padding: 6px 10px 6px 8px; gap: 6px; } .sg-pt b { font-size: .74rem; } .sg-pm { font-size: .68rem; } }
 @media (max-width: 800px) { .sg-venue { width: 88%; } }
+
+/* list and map embedded on the front page */
+.fp-embed { margin-top: 46px; text-align: left; }
+.fp-embed-h { margin: 0 0 14px; font: 800 1.5rem "Manrope", sans-serif; color: #fff; text-shadow: none; }
+.fp-embed .sg-app { position: relative; top: auto; left: auto; right: auto; bottom: auto; height: min(760px, 86dvh); grid-template-columns: minmax(430px, 52%) 1fr; border-radius: 20px; border: 1px solid rgba(255,255,255,.14); }
+.fp-embed .sg-list { height: 100%; } .fp-embed .sg-venue { width: min(94%, 600px); } .fp-embed .sg-zoom { top: 16px; right: 16px; } .fp-embed .sg-zoom button { width: 44px; height: 44px; }
+.fp-embed .sg-row { grid-template-columns: 150px 1fr auto; } .fp-embed .sg-thumb { width: 150px; height: 112px; } .fp-embed .sg-t { font-size: 1.35rem; } .fp-embed .sg-official { font-size: .95rem; } .fp-embed .sg-sub { gap: 8px; } .fp-embed .sg-pin { font-size: .9rem; }
+.fp-embed .sg-mapbtn { position: absolute; bottom: 16px; }
+@media (max-width: 1100px) { .fp-embed .sg-app { grid-template-columns: minmax(380px, 56%) 1fr; } .fp-embed .sg-row { grid-template-columns: 120px 1fr; } .fp-embed .sg-thumb { width: 120px; height: 92px; } }
+@media (max-width: 800px) { .fp-embed .sg-app { display: block; height: min(720px, 82dvh); } .fp-embed .sg-map { position: absolute; inset: 0; } .fp-embed .sg-row { grid-template-columns: 100px 1fr; } .fp-embed .sg-thumb { width: 100px; height: 82px; } .fp-embed .sg-t { font-size: 1.15rem; } }
