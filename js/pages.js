@@ -91,6 +91,46 @@
   const pages = {
     home() {
       const cover = (p) => (p.hero && (p.hero.src || (p.hero.row && p.hero.row[0] && p.hero.row[0].src))) || "";
+      const spark = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.6 4.4L14 7l-4.400 1.600L8 13l-1.600-4.400L2 7l4.400-1.600z" fill="currentColor"/></svg>';
+      const heart = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.500s-8-4.900-8-11A4.500 4.500 0 0 1 12 7a4.500 4.500 0 0 1 8 2.500c0 6.100-8 11-8 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+      const QS = [
+        ["Which project had the biggest outcome?", "outcome"],
+        ["Show me interview research", "interviews"],
+        ["Where did you use AI?", "ai"],
+        ["What did you do at Root?", "root"],
+        ["Best design work", "design"]
+      ];
+      return `
+        <div class="fp">
+          <h1 class="fp-h">Front-row seats to ${esc(me.firstName)}’s projects.</h1>
+          <p class="fp-sub">${esc(me.title === "UX Research & Design" ? "UX researcher and designer" : me.title)}. ${P.projects.length === 5 ? "Five" : P.projects.length} case studies, start anywhere.</p>
+          <form class="fp-search" id="fp-form" role="search">
+            <svg class="fp-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.500" cy="10.500" r="6" fill="none" stroke="currentColor" stroke-width="2.400"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.400" stroke-linecap="round"/></svg>
+            <label class="sr-only" for="fp-q">Search projects, or ask anything</label>
+            <input id="fp-q" type="search" placeholder="Search projects, or ask anything" autocomplete="off">
+            <button type="submit" class="fp-ask"><span class="fp-sp">${spark}</span> Ask</button>
+          </form>
+          <ul class="fp-chips" aria-label="Suggested questions">${QS.map(([q, k]) => `<li><button type="button" class="fp-chip" data-k="${k}"><span class="fp-sp">${spark}</span>${esc(q)}</button></li>`).join("")}</ul>
+          <section class="fp-answer" id="fp-answer" aria-live="polite" tabindex="-1" hidden></section>
+
+          <section class="fp-feat" aria-labelledby="feat-t">
+            <div class="fp-feat-head"><h2 id="feat-t">Featured projects</h2>
+              <div class="fp-arrows"><button type="button" id="fp-prev" aria-label="Previous projects">‹</button><button type="button" id="fp-next" aria-label="Next projects">›</button></div></div>
+            <ul class="fp-cards" id="fp-cards">${P.projects.map((p) => `
+              <li class="fp-card" data-id="${esc(p.id)}">
+                <a class="fp-img" href="project.html?p=${esc(p.id)}" tabindex="-1" aria-hidden="true">${cover(p) ? `<img src="${esc(cover(p))}" alt="" loading="lazy">` : ""}</a>
+                <button type="button" class="fp-save" aria-pressed="false" aria-label="Save ${esc(plain(p.title))}">${heart}</button>
+                <h3><a href="project.html?p=${esc(p.id)}">${t(p.title)}</a></h3>
+                <p>${esc(p.focus)} · ${esc(p.timeline || p.year || "")}</p>
+              </li>`).join("")}</ul>
+            <p class="fp-allrow"><a class="fp-all" href="projects.html">See all projects as a list and map <span aria-hidden="true">→</span></a></p>
+          </section>
+          <p class="sr-only" id="fp-live" role="status" aria-live="polite"></p>
+        </div>`;
+    },
+
+    projects() {
+      const cover = (p) => (p.hero && (p.hero.src || (p.hero.row && p.hero.row[0] && p.hero.row[0].src))) || "";
       const META = {
         "root-insurance": { badge: ["15", "retention concepts"], big: "18 sessions", small: "12 stakeholders + 6 customers", flag: "Most recent", ai: true, pin: [40, 89] },
         "usda-acir": { badge: ["3", "recommendations"], big: "15+ interviews", small: "10+ usability sessions", pin: [27, 22] },
@@ -559,7 +599,7 @@
       return `
         <article class="case" style="--ball:${esc(p.ballColor)}">
           <header class="case-hero">
-            <a class="back" href="work.html"><span aria-hidden="true">◂</span> All projects</a>
+            <a class="back" href="projects.html"><span aria-hidden="true">◂</span> All projects</a>
             <div class="case-title">
               ${ballSVG(p.ballColor, "case-ball")}
               <div>
@@ -608,9 +648,47 @@
 
   /* ---------- Page behaviours ---------- */
   if (page === "home") {
+    const byId = (id) => P.projects.find((x) => x.id === id);
+    const lnk = (id, label) => `<a href="project.html?p=${esc(id)}">${esc(label || plain(byId(id).title))}</a>`;
+    const ANS = {
+      outcome: { h: "Which project had the biggest outcome?", t: `Two stand out. At <b>Root Insurance</b>, the research produced <b>15 net-new retention concepts</b>, shared out in three executive readouts, plus a centralized research repository. For the <b>USDA ACIR portal</b>, the work ended in <b>three recommendations, and new features now live on USDA’s national portal</b>.`, ids: ["root-insurance", "usda-acir"] },
+      interviews: { h: "Show me interview research", t: `<b>Root Insurance:</b> 12 stakeholder and 6 customer interviews. <b>USDA ACIR:</b> 15+ interviews with importers, brokers, and officials. <b>Instructure ElevateED:</b> 10 interviews with learners, HR professionals, and an Instructure partner.`, ids: ["root-insurance", "usda-acir", "instructure-elevated"] },
+      ai: { h: "Where did you use AI?", t: `For <b>Instructure ElevateED</b>, I built the recommendations as prototypes with AI-assisted prototyping in Figma Make. For <b>Root Insurance</b>, I built a centralized research repository with Claude Code so teams could find user insights.`, ids: ["instructure-elevated", "root-insurance"] },
+      root: { h: "What did you do at Root?", t: `As a UX research intern, I ran an end-to-end mixed-methods study across <b>18 sessions</b> (12 stakeholder and 6 customer interviews, plus live usability testing), delivered <b>three executive readouts</b> to leaders including the Director of Design and the SVP of Product, turned the findings into <b>15 retention concepts in Figma</b>, and built the research repository.`, ids: ["root-insurance"] },
+      design: { h: "Best design work", t: `<b>Crown Code</b> is a pageant interview-prep app I designed solo, from the design system to every screen. <b>Milk & Froth</b> is a website redesign where I built the design system first, then designed the location, e-commerce, and 404 pages as one of two designers.`, ids: ["crown-code", "milk-and-froth"] }
+    };
+    const box = document.getElementById("fp-answer"), live = document.getElementById("fp-live"), input = document.getElementById("fp-q");
+    const show = (a, lead) => {
+      box.innerHTML = `<div class="fp-ans-top"><span class="fp-sp">${'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.6 4.4L14 7l-4.400 1.600L8 13l-1.600-4.400L2 7l4.400-1.600z" fill="currentColor"/></svg>'}</span><h2>${lead || a.h}</h2><button type="button" class="fp-close" aria-label="Close answer">✕</button></div><p>${a.t}</p><ul class="fp-ans-links">${a.ids.map((id) => `<li>${lnk(id)}</li>`).join("")}</ul><p class="fp-note">Written from my case studies, not generated live.</p>`;
+      box.hidden = false; box.focus({ preventScroll: false }); box.scrollIntoView({ block: "nearest", behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+      box.querySelector(".fp-close").addEventListener("click", () => { box.hidden = true; input.focus(); });
+      live.textContent = "Answer shown";
+    };
+    document.querySelectorAll(".fp-chip").forEach((c) => c.addEventListener("click", () => { input.value = c.textContent.trim(); show(ANS[c.dataset.k]); }));
+    const KW = [["outcome", /outcome|biggest|impact|result/i], ["interviews", /interview/i], ["ai", /\bai\b|figma make|claude|artificial/i], ["root", /root/i], ["design", /design|ui|app|website/i]];
+    document.getElementById("fp-form").addEventListener("submit", (e) => {
+      e.preventDefault(); const q = input.value.trim(); if (!q) return;
+      const hit = KW.find(([, re]) => re.test(q));
+      const matches = P.projects.filter((x) => [plain(x.title), x.focus, (x.tags || []).join(" "), x.summary || "", x.approach || ""].join(" ").toLowerCase().includes(q.toLowerCase()));
+      if (matches.length && !(hit && q.length > 12)) show({ t: `${matches.length === 1 ? "One project matches" : matches.length + " projects match"} “${esc(q)}”.`, ids: matches.map((m) => m.id) }, `Results for “${esc(q)}”`);
+      else if (hit) show(ANS[hit[0]]);
+      else show({ t: `I don’t have a written answer for that yet. Try one of the suggestions above, or <a href="projects.html">browse all the projects</a>, or <a href="contact.html">ask me directly</a>.`, ids: [] }, "No match");
+    });
+    // carousel
+    const row = document.getElementById("fp-cards"), step = () => (row.firstElementChild ? row.firstElementChild.getBoundingClientRect().width + 20 : 300);
+    const rm = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("fp-prev").addEventListener("click", () => row.scrollBy({ left: -step(), behavior: rm() ? "auto" : "smooth" }));
+    document.getElementById("fp-next").addEventListener("click", () => row.scrollBy({ left: step(), behavior: rm() ? "auto" : "smooth" }));
+    // saves
+    let saved = {}; try { saved = JSON.parse(localStorage.getItem("sg-saved") || "{}"); } catch (e) {}
+    row.querySelectorAll(".fp-card").forEach((c) => { const b = c.querySelector(".fp-save"), id = c.dataset.id; const paint = () => b.setAttribute("aria-pressed", String(!!saved[id])); paint(); b.addEventListener("click", () => { saved[id] = !saved[id]; try { localStorage.setItem("sg-saved", JSON.stringify(saved)); } catch (e) {} paint(); live.textContent = saved[id] ? "Saved" : "Removed from saved"; }); });
+  }
+
+  if (page === "projects") {
     const rows = document.getElementById("rows"), empty = document.getElementById("sg-empty"), cnt = document.getElementById("sg-count");
     const chips = [...document.querySelectorAll(".sg-chip")];
     let f = "all";
+    const qf = new URLSearchParams(location.search).get("f"); if (["research", "design", "ai"].includes(qf)) f = qf;
     const apply = () => {
       let n = 0;
       [...rows.children].forEach((li) => {

@@ -152,7 +152,8 @@
 
   /* ---------- HUD header + footer ---------- */
   const NAV = [
-    { href: "index.html", label: "Projects", key: "home" },
+    { href: "index.html", label: "Home", key: "home" },
+    { href: "projects.html", label: "Projects (list and map)", key: "projects" },
     { href: "work.html", label: "All work", key: "work" },
     { href: "about.html", label: "About", key: "about" },
     { href: "resume.html", label: "Resume", key: "resume" },
@@ -169,7 +170,22 @@
     const page = document.body.dataset.page;
     const header = document.getElementById("hud");
     if (header) {
-      const sub = page === "home" ? `${esc(me.location)} · M.S. 2027 · ${P0().length} projects` : `${esc(me.title)} · ${esc(me.location)}`;
+      const sub = page === "projects" ? `${esc(me.location)} · M.S. 2027 · ${P0().length} projects` : `${esc(me.title)} · ${esc(me.location)}`;
+      if (page === "home") {
+        header.innerHTML = `
+        <a class="skip" href="#main">Skip to content</a>
+        <div class="sg-bar sg-bar--front">
+          <a class="sg-brand sg-brand--red" href="index.html" aria-label="${esc(me.firstName)} ${esc(me.lastName)}, home"><span>${esc(me.firstName.toUpperCase())}</span><span>${esc(me.lastName.toUpperCase())}</span></a>
+          <nav class="sg-links" aria-label="Sections"><a href="projects.html?f=research">Research</a><a href="projects.html?f=design">Design</a><a href="about.html">About</a><a href="resume.html">Resume</a></nav>
+          <div class="sg-right">
+            <a class="sg-pill" href="contact.html">Contact</a>
+            <button type="button" class="sg-ic" id="sg-menu-btn" aria-expanded="false" aria-controls="sg-menu" aria-label="Menu">${SG.menu}</button>
+          </div>
+          <nav class="sg-menu" id="sg-menu" aria-label="Main" hidden>
+            <ul>${NAV.map((n) => `<li><a href="${n.href}"${page === n.key ? ' aria-current="page"' : ""}>${n.label}</a></li>`).join("")}</ul>
+          </nav>
+        </div>`;
+      } else
       header.innerHTML = `
         <a class="skip" href="#main">Skip to content</a>
         <div class="sg-bar">
@@ -195,7 +211,7 @@
     }
     const footer = document.getElementById("footer");
     if (footer) {
-      footer.innerHTML = page === "home" ? "" : `
+      footer.innerHTML = page === "projects" ? "" : `
         <div class="footer-inner">
           <p>Designed &amp; built by ${esc(me.firstName)} ${esc(me.lastName)}. Visual style inspired by SeatGeek’s app; independent project, not affiliated with SeatGeek.</p>
           <p class="footer-links">

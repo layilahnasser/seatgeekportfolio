@@ -1,6 +1,6 @@
 # Layilah Campbell: UX research and design portfolio (ticket-marketplace edition)
 
-The home page works like an event page in a ticket marketplace: a navy header with an event pill, filter chips, a list of project "listings" with badges and key numbers, and a venue-style map where each project is a pin. Hover a row to highlight its pin. On phones the map opens with a Map button.
+The front page follows a ticket marketplace's home page: a dark hero ("Front-row seats to Layilah's projects."), a search-or-ask bar with suggestion chips that show short answers written from the case studies, and a Featured projects carousel with save hearts. The Projects page (`projects.html`) works like an event page: filter chips, listings with key numbers, and a venue-style map with a pin for each project.
 
 Visual style inspired by SeatGeek's app. It uses no SeatGeek logos or assets and is not affiliated with SeatGeek.
 
