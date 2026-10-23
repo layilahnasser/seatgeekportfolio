@@ -1204,3 +1204,9 @@ body[data-page="home"] .lg { vertical-align: -.22em; margin: 0 .2em; } body[data
 .fp-embed .sg-mapbtn { position: absolute; bottom: 16px; }
 @media (max-width: 1100px) { .fp-embed .sg-app { grid-template-columns: minmax(380px, 56%) 1fr; } .fp-embed .sg-row { grid-template-columns: 120px 1fr; } .fp-embed .sg-thumb { width: 120px; height: 92px; } }
 @media (max-width: 800px) { .fp-embed .sg-app { display: block; height: min(720px, 82dvh); } .fp-embed .sg-map { position: absolute; inset: 0; } .fp-embed .sg-row { grid-template-columns: 100px 1fr; } .fp-embed .sg-thumb { width: 100px; height: 82px; } .fp-embed .sg-t { font-size: 1.15rem; } }
+
+.sg-std-link { margin-left: auto; margin-right: 6px; display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid rgba(255,255,255,.35); color: #fff; font: 700 .98rem "Manrope", sans-serif; text-decoration: none; white-space: nowrap; }
+.sg-std-link:hover { background: rgba(255,255,255,.14); } .sg-std-link:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.sg-bar--front .sg-std-link { margin-left: auto; } .sg-bar--front .sg-right { margin-left: 0; } .sg-std-link--nav { margin-left: 0; }
+.sg-std { border-bottom: 1px solid var(--sg-line); border-radius: 8px 8px 0 0; color: var(--sg-blue) !important; }
+@media (max-width: 1000px) { .sg-std-link { display: none; } }
