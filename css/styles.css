@@ -1187,3 +1187,5 @@ body[data-page="home"] .footer { background: transparent; border-top: 1px solid 
 .fp-allrow { margin: 26px 0 0; } .fp-all { color: #fff; font: 700 1.02rem "Manrope", sans-serif; text-underline-offset: 5px; } .fp-all:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 @media (max-width: 800px) { .sg-links { display: none; } .sg-bar--front { height: 70px; padding: 0 16px; } body[data-page="home"] .sg-pill { display: inline-flex; min-height: 42px; padding: 0 16px; } .fp { padding-top: 24px; } .fp-search { padding: 8px 8px 8px 18px; } .fp-search input { font-size: 1.05rem; } .fp-ask { padding: 0 14px; } .fp-card { flex-basis: 78%; } .fp-feat-head h2 { font-size: 1.25rem; } body[data-page="home"] main > .fp { width: calc(100% - 32px); } }
 @media (prefers-reduced-motion: reduce) { .fp-img img { transition: none; } }
+.fp-sub { max-width: 760px; margin-left: auto; margin-right: auto; line-height: 1.55; }
+body[data-page="home"] .lg { vertical-align: -.22em; margin: 0 .2em; } body[data-page="home"] .lg img { height: 1.3em; }

@@ -103,7 +103,7 @@
       return `
         <div class="fp">
           <h1 class="fp-h">Front-row seats to ${esc(me.firstName)}’s projects.</h1>
-          <p class="fp-sub">${esc(me.title === "UX Research & Design" ? "UX researcher and designer" : me.title)}. ${P.projects.length === 5 ? "Five" : P.projects.length} case studies, start anywhere.</p>
+          <p class="fp-sub">${esc(me.headline).replace("Google, Adobe &amp; Meta", `<span class="lg"><img src="${INL.logos.google}" alt="Google"></span><span class="lg"><img src="${INL.logos.adobe}" alt="Adobe"></span><span class="lg"><img src="${INL.logos.meta}" alt="Meta"></span>`)}</p>
           <form class="fp-search" id="fp-form" role="search">
             <svg class="fp-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.500" cy="10.500" r="6" fill="none" stroke="currentColor" stroke-width="2.400"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.400" stroke-linecap="round"/></svg>
             <label class="sr-only" for="fp-q">Search projects, or ask anything</label>
