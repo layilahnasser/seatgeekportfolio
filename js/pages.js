@@ -617,19 +617,16 @@
                 <h1>${t(p.title)}</h1>
                 <p class="lede">${t(p.subtitle)}</p>
                 ${p.intro ? `<p class="case-intro">${t(p.intro)}</p>` : ""}
+                <p class="meta-line">${[p.role, p.team, p.timeline].filter(Boolean).map((x) => `<span>${String(x).split("\n").map((l) => t(l)).join(", ")}</span>`).join("")}</p>
+                ${!isResearch && p.tools ? `<p class="meta-sub"><b>${esc(p.toolsLabel || "Tools & methods")}:</b> ${String(p.tools).split("\n").map((l) => t(l)).join(" · ")}</p>` : ""}
               </div>
             </div>
             ${img(p.hero, "shot--hero" + (p.hero && p.hero.fit === "phone" ? " shot--phone" : ""))}
-            <dl class="case-meta${isResearch ? " case-meta--3" : ""}">
-              <div><dt>Role</dt><dd>${t(p.role)}</dd></div>
-              <div><dt>Team</dt><dd>${String(p.team).split("\n").map((l) => t(l)).join("<br>")}</dd></div>
-              <div><dt>Timeline</dt><dd>${t(p.timeline)}</dd></div>
-              ${isResearch ? "" : `<div><dt>${esc(p.toolsLabel || "Tools & methods")}</dt><dd>${String(p.tools).split("\n").map((l) => t(l)).join("<br>")}</dd></div>`}
-            </dl>
+            
             ${p.glance ? `<ul class="glance-boxes" aria-label="Case study at a glance">${[["Problem", p.glance.problem], ["What I did", p.glance.did], ["What changed", p.glance.changed]].map(([k, v]) => `<li><b>${k}</b><span>${t(v)}</span></li>`).join("")}</ul>` : ""}
-            <div class="expand-bar"><p>Skim the summaries, or open every section to see the methods, evidence, and reasons behind them.</p><button type="button" class="expand-all" aria-pressed="false">Open all details</button></div>
           </header>
 
+          <div class="expand-row"><button type="button" class="expand-all" aria-pressed="false">Open all details</button></div>
           <nav class="fstrip-nav" aria-label="Case study frames"><span class="fprog" id="fprog" aria-hidden="true"></span>
             <ol class="fstrip">${FRAMES.map((f, i) => `<li class="fcell"><a href="#${f.key}" data-frame="${f.key}"><span class="fn">${i + 1}<span class="fl"> ${f.label}</span></span><span class="fm" aria-hidden="true"></span><span class="sr-only fstate"></span></a></li>`).join("")}</ol>
           </nav>

@@ -1261,3 +1261,8 @@ body[data-page="project"] { padding-bottom: 76px; }
 
 .case-meta--3 { grid-template-columns: repeat(3, 1fr); } @media (max-width: 760px) { .case-meta--3 { grid-template-columns: 1fr; } }
 .fold-h { margin: 34px 0 10px; font-size: 1.25rem; }
+
+.meta-line { display: flex; flex-wrap: wrap; gap: 4px 0; margin: 12px 0 0; font: 600 1rem/1.5 "Manrope", sans-serif; color: #263043; } .meta-line span:not(:last-child)::after { content: "\00b7"; margin: 0 12px; color: #6b7487; } .meta-sub { margin: 6px 0 0; font: 500 .98rem/1.5 "Manrope", sans-serif; color: #566074; } .meta-sub b { color: #263043; }
+.glance-boxes li { padding: 14px 18px; line-height: 1.45; }
+.expand-row { display: flex; justify-content: flex-end; margin: 0 0 10px; }
+@media (max-width: 640px) { .meta-line span:not(:last-child)::after { margin: 0 8px; } .expand-row { justify-content: flex-start; } }
