@@ -228,12 +228,20 @@
     let seen = false;
     try { seen = sessionStorage.getItem("sg-note") === "1"; sessionStorage.setItem("sg-note", "1"); } catch (e) {}
     if (seen) return;
+    const prev = document.activeElement;
     const n = document.createElement("div");
-    n.className = "sg-toast"; n.setAttribute("role", "status");
-    n.innerHTML = `<p>Visual style inspired by SeatGeek’s app. Independent project; not affiliated with SeatGeek.</p><button type="button" aria-label="Dismiss notice">✕</button>`;
-    const off = () => { n.classList.add("is-out"); setTimeout(() => n.remove(), 350); };
-    n.querySelector("button").addEventListener("click", off);
-    document.body.appendChild(n); setTimeout(off, 9000);
+    n.className = "sg-modal";
+    n.innerHTML = `<div class="sg-modal-card" role="dialog" aria-modal="true" aria-labelledby="sg-modal-t" tabindex="-1">
+      <h2 id="sg-modal-t">Before you look around</h2>
+      <p>Visual style inspired by SeatGeek’s app. Independent project; not affiliated with SeatGeek.</p>
+      <button type="button" class="sg-modal-ok">Got it</button></div>`;
+    const card = n.firstElementChild, ok = n.querySelector("button");
+    const off = () => { n.remove(); document.removeEventListener("keydown", key); if (prev && prev.focus) prev.focus(); };
+    const key = (e) => { if (e.key === "Escape") off(); else if (e.key === "Tab") { e.preventDefault(); ok.focus(); } };
+    ok.addEventListener("click", off);
+    n.addEventListener("click", (e) => { if (e.target === n) off(); });
+    document.addEventListener("keydown", key);
+    document.body.appendChild(n); ok.focus();
   }
   function scrollTheme() {
     if (document.body.dataset.page !== "home") return;
