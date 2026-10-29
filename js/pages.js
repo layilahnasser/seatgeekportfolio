@@ -104,16 +104,28 @@
       const STEPS = [["Problem","I start by naming the problem with the people closest to it, like why Root customers leave or why the USDA import portal is hard to use."],["Research","Interviews, surveys, and usability tests: 12 stakeholder and 6 customer interviews at Root, and 15+ interviews at USDA."],["Define","Affinity mapping groups what we heard into themes, like Root’s retention levers and USDA’s findability barriers."],["Ideate","Insight becomes ideas: 15 net-new retention concepts at Root, and five learning barriers turned into three product recommendations for ElevateED."],["Iterate","Refining the work: wireframes and a shared component library for Milk & Froth, and live usability testing at Root."],["Execute","Building the deliverable: final screens and a design system for Milk & Froth, four core tabs for Crown Code, and a centralized research repository at Root."],["Impact","Sharing what changed: final shareouts to leadership at Root and Instructure, and recommendations now live on USDA’s national portal."]];
       return `
         <div class="fp">
+          <div class="fp-hero" id="fp-hero">
           <h1 class="fp-h">Front-row seats to my projects.</h1>
           <p class="fp-sub">${esc(me.headline).replace("Google, Adobe &amp; Meta", `<span class="lg"><img src="${INL.logos.google}" alt="Google"></span><span class="lg"><img src="${INL.logos.adobe}" alt="Adobe"></span><span class="lg"><img src="${INL.logos.meta}" alt="Meta"></span>`)}</p>
-          <form class="fp-search" id="fp-form" role="search">
+          <div class="fp-sw"><form class="fp-search" id="fp-form" role="search">
             <svg class="fp-mag" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.500" cy="10.500" r="6" fill="none" stroke="currentColor" stroke-width="2.400"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.400" stroke-linecap="round"/></svg>
             <label class="sr-only" for="fp-q">Search projects, or ask anything</label>
             <input id="fp-q" type="search" placeholder="Search projects, or ask anything" autocomplete="off">
             <button type="submit" class="fp-ask"><span class="fp-sp">${spark}</span> Ask</button>
           </form>
+          <div class="fp-pop" id="fp-pop" role="region" aria-label="Browse projects" hidden>
+            <h2>Browse categories</h2>
+            <ul class="fp-pcats"><li><a href="projects.html?f=research">Research</a></li><li><a href="projects.html?f=design">Design</a></li><li><a href="projects.html?f=ai"><span class="fp-sp">${spark}</span> AI-assisted</a></li></ul>
+            <h2>Popular projects</h2>
+            <ul class="fp-plist">${P.projects.map((p) => `<li><a href="project.html?p=${esc(p.id)}"><span class="fp-pth" aria-hidden="true">${(p.hero && (p.hero.src || (p.hero.row && p.hero.row[0] && p.hero.row[0].src))) ? `<img src="${esc(p.hero.src || p.hero.row[0].src)}" alt="" loading="lazy">` : ""}</span><span>${t(p.title)}</span></a></li>`).join("")}</ul>
+          </div></div>
           <ul class="fp-chips" aria-label="Suggested questions">${QS.map(([q, k]) => `<li><button type="button" class="fp-chip" data-k="${k}"><span class="fp-sp">${spark}</span>${esc(q)}</button></li>`).join("")}</ul>
           <section class="fp-answer" id="fp-answer" aria-live="polite" tabindex="-1" hidden></section>
+          </div>
+          <section class="fp-trust" aria-label="At a glance">
+            <div><span class="fp-ti" aria-hidden="true">${"&#10003;"}</span><b>Every project is a full case study</b><p>From the first question to final designs, with the research behind each decision.</p></div>
+            <div><span class="fp-ti" aria-hidden="true">7</span><b>Years in tech</b><p>Now finishing an M.S. at the University of Michigan School of Information, May 2027.</p></div>
+          </section>
 
           <section class="fp-proc" aria-labelledby="proc-t"><h2 id="proc-t">How I work, step by step</h2><ol class="fp-steps" id="fp-steps">${STEPS.map((st, i) => `<li class="${i === 0 ? "is-on" : ""}"><button type="button" data-i="${i}" aria-expanded="${i === 0}"><span class="fp-dot">${i + 1}</span><span class="fp-lbl">${st[0]}</span></button></li>`).join("")}</ol><div class="fp-pan" aria-live="polite"><b id="fp-ph">${STEPS[0][0]}</b><p id="fp-pp">${STEPS[0][1]}</p></div></section>
           <section class="fp-embed" aria-labelledby="seat-t">
@@ -136,7 +148,6 @@
       const metaOf = (p) => META[p.id] || { badge: ["", ""], big: p.year || "", small: p.focus || "", pin: [50, 50] };
       const bolt = '<svg viewBox="0 0 12 16" aria-hidden="true"><path d="M7 0L1 9h4l-1 7 7-10H7z" fill="currentColor"/></svg>';
       const FRAME = { "milk-and-froth": "Making a hard-to-navigate experience feel simple", "root-insurance": "Tackling a real retention problem", "crown-code": "Giving contestants one place to prepare", "usda-acir": "Simplifying a complex system", "instructure-elevated": "Opening a path to learning" };
-      const ORDER = ["crown-code", "usda-acir", "milk-and-froth", "root-insurance", "instructure-elevated"];
       const PAIN = { "milk-and-froth": "The site did not showcase the flavors and had no way to order online.", "usda-acir": "Importers, brokers, and officials struggle to find and trust import requirements.", "instructure-elevated": "79% of people in the US do not attend a traditional university, yet Instructure mostly serves traditional schools." };
       const row = (p) => {
         const m = metaOf(p);
@@ -658,6 +669,16 @@
       design: { h: "Best design work", t: `<b>Crown Code</b> is a pageant interview-prep app I designed solo, from the design system to every screen. <b>Milk & Froth</b> is a website redesign where I built the design system first, then designed the location, e-commerce, and 404 pages as one of two designers.`, ids: ["crown-code", "milk-and-froth"] }
     };
     document.querySelectorAll("#fp-steps button").forEach((b) => b.addEventListener("click", () => { const i = +b.dataset.i; const st = STEPS_JS[i]; document.querySelectorAll("#fp-steps li").forEach((li, j) => { li.classList.toggle("is-on", j === i); li.classList.toggle("is-done", j < i); li.firstElementChild.setAttribute("aria-expanded", String(j === i)); }); document.getElementById("fp-ph").textContent = st[0]; document.getElementById("fp-pp").textContent = st[1]; }));
+    const pop = document.getElementById("fp-pop"), qin = document.getElementById("fp-q"), sw = pop && pop.parentElement;
+    if (pop) {
+      const show = () => { if (!qin.value.trim()) pop.hidden = false; };
+      const hide = () => { pop.hidden = true; };
+      qin.addEventListener("focus", show); qin.addEventListener("click", show);
+      qin.addEventListener("input", () => { qin.value.trim() ? hide() : show(); });
+      document.addEventListener("click", (e) => { if (!sw.contains(e.target)) hide(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !pop.hidden) { hide(); qin.focus(); } });
+      document.getElementById("fp-form").addEventListener("submit", hide);
+    }
     const box = document.getElementById("fp-answer"), live = document.getElementById("fp-live"), input = document.getElementById("fp-q");
     const show = (a, lead) => {
       box.innerHTML = `<div class="fp-ans-top"><span class="fp-sp">${'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l1.6 4.4L14 7l-4.400 1.600L8 13l-1.600-4.400L2 7l4.400-1.600z" fill="currentColor"/></svg>'}</span><h2>${lead || a.h}</h2><button type="button" class="fp-close" aria-label="Close answer">✕</button></div><p>${a.t}</p><ul class="fp-ans-links">${a.ids.map((id) => `<li>${lnk(id)}</li>`).join("")}</ul><p class="fp-note">Written from my case studies, not generated live.</p>`;

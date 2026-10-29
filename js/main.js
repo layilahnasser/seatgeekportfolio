@@ -235,9 +235,28 @@
     n.querySelector("button").addEventListener("click", off);
     document.body.appendChild(n); setTimeout(off, 9000);
   }
+  function scrollTheme() {
+    if (document.body.dataset.page !== "home") return;
+    const flip = () => { const hero = document.getElementById("fp-hero"); if (hero) document.body.classList.toggle("is-light", hero.getBoundingClientRect().bottom <= 90); };
+    window.addEventListener("scroll", flip, { passive: true }); window.addEventListener("resize", flip); flip();
+  }
+  function buyBar() {
+    if (document.body.dataset.page !== "project") return;
+    const id = new URLSearchParams(location.search).get("p");
+    const p = P0().find((x) => x.id === id);
+    if (!p) return;
+    const bar = document.createElement("aside");
+    bar.className = "sg-buy"; bar.setAttribute("aria-label", "Next steps");
+    bar.innerHTML = `<div class="sg-buy-in"><p><b>${t(p.title)}</b><small>${esc(p.role || "")}${p.role ? " · " : ""}${esc(me.firstName)} ${esc(me.lastName)}</small></p><a class="sg-buy-b sg-buy-b--o" href="projects.html">All projects</a><a class="sg-buy-b" href="contact.html">Contact me</a></div>`;
+    document.body.appendChild(bar);
+    const on = () => bar.classList.toggle("is-in", window.scrollY > 240);
+    window.addEventListener("scroll", on, { passive: true }); on();
+  }
   function P0() { return window.PORTFOLIO.projects; }
 
   window.LANES = { esc, t, isTodo, plain, img, ballSVG, logo, portrait };
   renderChrome();
+  scrollTheme();
+  buyBar();
   showNotice();
 })();
