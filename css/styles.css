@@ -678,7 +678,7 @@ html:has(body[data-page="project"]) { scroll-padding-top: 160px; }
 .comp-table tr:last-child th, .comp-table tr:last-child td { border-bottom: 0; }
 .comp-table td.yes { color: var(--accent); font-weight: 700; font-size: 1.15rem; }
 .comp-table td.no { color: var(--muted); }
-.comp-us { background: rgba(198, 242, 74, 0.12); color: #c6f24a !important; }
+.comp-us { background: rgba(198, 242, 74, 0.12); color: #3b6600 !important; }
 .comp-wrap:focus-visible { outline: 3px solid var(--gold-text); outline-offset: 2px; }
 
 .ds-type { display: flex; justify-content: center; }
@@ -1258,3 +1258,6 @@ body[data-page="home"] .footer { background: #fff; border-top: 1px solid var(--s
 body[data-page="project"] { padding-bottom: 76px; }
 @media (max-width: 600px) { .sg-buy-b--o { display: none; } .sg-buy { padding-left: 16px; padding-right: 16px; } }
 @media (prefers-reduced-motion: reduce) { .sg-buy, body[data-page="home"] .hud { transition: none; } }
+
+.case-meta--3 { grid-template-columns: repeat(3, 1fr); } @media (max-width: 760px) { .case-meta--3 { grid-template-columns: 1fr; } }
+.fold-h { margin: 34px 0 10px; font-size: 1.25rem; }
