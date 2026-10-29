@@ -1125,7 +1125,7 @@ body[data-page="projects"] main > :not(.sr-only) { width: auto; margin: 0; max-w
 .sg-nbtns { display: flex; gap: 10px; flex-wrap: wrap; }
 .sg-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 12px; background: var(--navy); color: #fff; font: 700 1rem "Manrope", sans-serif; text-decoration: none; border: 2px solid var(--navy); flex: 1; } .sg-btn:hover { background: var(--navy-2); } .sg-btn--line { background: #fff; color: var(--navy); } .sg-btn--line:hover { background: var(--sg-bg); } .sg-btn:focus-visible { outline: 3px solid var(--sg-blue); outline-offset: 2px; }
 .sg-mapbtn { display: none; }
-.sg-toast { position: fixed; z-index: 3000; top: 84px; left: 50%; transform: translateX(-50%); width: min(520px, calc(100% - 24px)); display: flex; align-items: center; gap: 8px; padding: 10px 6px 10px 16px; border-radius: 14px; background: var(--sg-ink); color: #fff; box-shadow: 0 10px 34px rgba(0,0,0,.35); transition: opacity .3s, transform .3s; } .sg-toast p { margin: 0; flex: 1; font: 500 .9rem/1.4 "Manrope", sans-serif; } .sg-toast button { all: unset; cursor: pointer; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 8px; } .sg-toast button:focus-visible { outline: 3px solid #fff; } .sg-toast.is-out { opacity: 0; transform: translate(-50%, -10px); }
+.sg-toast { position: fixed; z-index: 3000; bottom: 20px; left: 24px; width: min(430px, calc(100% - 24px)); display: flex; align-items: center; gap: 8px; padding: 10px 6px 10px 16px; border-radius: 14px; background: var(--sg-ink); color: #fff; box-shadow: 0 10px 34px rgba(0,0,0,.35); transition: opacity .3s, transform .3s; } .sg-toast p { margin: 0; flex: 1; font: 500 .9rem/1.4 "Manrope", sans-serif; } .sg-toast button { all: unset; cursor: pointer; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 8px; } .sg-toast button:focus-visible { outline: 3px solid #fff; } .sg-toast.is-out { opacity: 0; transform: translate(-50%, -10px); }
 
 @media (max-width: 1100px) { .sg-app { grid-template-columns: minmax(400px, 52%) 1fr; } .sg-row { grid-template-columns: 150px 1fr; } .sg-thumb { width: 150px; height: 112px; } .sg-side { grid-column: 2; text-align: left; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; } .sg-small { margin: 0; max-width: none; } }
 @media (max-width: 800px) {
@@ -1134,7 +1134,7 @@ body[data-page="projects"] main > :not(.sr-only) { width: auto; margin: 0; max-w
   .sg-chips { padding: 14px 14px; } .sg-sub { padding: 14px 14px 4px; } .sg-official { font-size: .9rem; } .sg-rows { padding: 4px 14px 90px; } .sg-row { grid-template-columns: 110px 1fr; gap: 12px; } .sg-thumb { width: 110px; height: 90px; } .sg-t { font-size: 1.2rem; } .sg-meta { font-size: .9rem; margin-bottom: 8px; } .sg-big { font-size: 1.15rem; } .sg-small { font-size: .88rem; }
   .sg-venue { width: 96%; } .sg-pin { font-size: .78rem; padding: 6px 9px; }
   .sg-mapbtn { display: inline-flex; align-items: center; justify-content: center; position: fixed; z-index: 8; left: 50%; bottom: 18px; transform: translateX(-50%); min-height: 52px; padding: 0 34px; border-radius: 999px; border: 0; background: var(--sg-ink); color: #fff; font: 800 1.05rem "Manrope", sans-serif; box-shadow: 0 6px 20px rgba(0,0,0,.3); cursor: pointer; } .sg-mapbtn:focus-visible { outline: 3px solid var(--sg-blue); outline-offset: 3px; }
-  .sg-notify { right: 12px; left: 12px; width: auto; bottom: 84px; } .sg-toast { top: 72px; }
+  .sg-notify { right: 12px; left: 12px; width: auto; bottom: 84px; } .sg-toast { bottom: 84px; }
 }
 @media (prefers-reduced-motion: reduce) { .sg-venue, .sg-pin, .sg-row, .sg-toast { transition: none; } }
 /* inner pages inherit the light site; keep the pill nav hidden */
@@ -1281,3 +1281,4 @@ body[data-page="project"] { padding-bottom: 76px; }
 .cmp-after--multi { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; align-items: start; } .cmp-after .shot { margin: 0; }
 .cmp-after--multi .shot:last-child img { object-fit: cover; }
 @media (max-width: 700px) { .compare-pair { grid-template-columns: 1fr; } .compare--page .shot img, .compare--page .shot--full img { max-height: 320px; } }
+@media (max-width: 800px) { .sg-toast { left: 12px; } }
