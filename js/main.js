@@ -153,8 +153,7 @@
   /* ---------- HUD header + footer ---------- */
   const NAV = [
     { href: "index.html", label: "Home", key: "home" },
-    { href: "projects.html", label: "Projects (list and map)", key: "projects" },
-    { href: "work.html", label: "All work", key: "work" },
+    { href: "projects.html", label: "Projects", key: "projects" },
     { href: "about.html", label: "About", key: "about" },
     { href: "resume.html", label: "Resume", key: "resume" },
     { href: "contact.html", label: "Contact", key: "contact" }
@@ -197,7 +196,7 @@
           </a>
           <a class="sg-std-link sg-std-link--nav" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio <span aria-hidden="true">↗</span></a>
           <div class="sg-right">
-            <a class="sg-ic" href="work.html" aria-label="Search all work">${SG.search}</a>
+            <a class="sg-ic" href="projects.html" aria-label="Search all projects">${SG.search}</a>
             <a class="sg-pill${page === "contact" ? " is-active" : ""}" href="contact.html"${page === "contact" ? ' aria-current="page"' : ""}>Contact</a>
             <button type="button" class="sg-ic" id="sg-menu-btn" aria-expanded="false" aria-controls="sg-menu" aria-label="Menu">${SG.menu}</button>
           </div>

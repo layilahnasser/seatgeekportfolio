@@ -1210,3 +1210,6 @@ body[data-page="home"] .lg { vertical-align: -.22em; margin: 0 .2em; } body[data
 .sg-bar--front .sg-std-link { margin-left: auto; } .sg-bar--front .sg-right { margin-left: 0; } .sg-std-link--nav { margin-left: 0; }
 .sg-std { border-bottom: 1px solid var(--sg-line); border-radius: 8px 8px 0 0; color: var(--sg-blue) !important; }
 @media (max-width: 1000px) { .sg-std-link { display: none; } }
+
+@media (max-width: 800px) { .fp-chips { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 4px 16px 8px; scroll-snap-type: x proximity; } .fp-chips::-webkit-scrollbar { display: none; } .fp-chips li { flex: none; scroll-snap-align: start; } .fp-chip { white-space: nowrap; } }
+.fp-embed .sg-official, .fp-embed .sg-list { color: var(--sg-ink); } .sg-official { color: var(--sg-ink); }

@@ -279,7 +279,7 @@
           <p>Want to talk about research, design, or a role?</p>
           <div class="cta-actions">
             <a class="btn btn--ghost" href="contact.html">Get in touch</a>
-            <a class="btn btn--pink" href="work.html">See my work</a>
+            <a class="btn btn--pink" href="projects.html">See my work</a>
           </div>
         </section>`;
     },
@@ -350,7 +350,7 @@
         <section class="page-head page-head--row">
           <div>
             <p class="eyebrow">Resume</p>
-            <h1>Career scorecard</h1>
+            <h1>Resume</h1>
             <p class="lede">${t(R.summary)}</p>
           </div>
           <a class="btn btn--pink" href="${esc(me.resumePdf)}" download>Download PDF</a>
@@ -625,9 +625,9 @@
                 ${
                   isLast
                     ? `<p>That was the last case study.</p>
-                <div class="sp-btns"><a class="btn btn--pink" href="work.html">Back to all projects</a><a class="btn btn--ghost" href="contact.html">Get in touch</a></div>`
+                <div class="sp-btns"><a class="btn btn--pink" href="projects.html">Back to all projects</a><a class="btn btn--ghost" href="contact.html">Get in touch</a></div>`
                     : `<p>You finished: ${esc(plain(p.title))}. Up next: ${esc(plain(next.title))}.</p>
-                <div class="sp-btns"><a class="btn btn--pink" href="project.html?p=${esc(next.id)}">${esc(plain(next.title))} <span aria-hidden="true">→</span></a><a class="btn btn--ghost" href="work.html">Back to all projects</a></div>`
+                <div class="sp-btns"><a class="btn btn--pink" href="project.html?p=${esc(next.id)}">${esc(plain(next.title))} <span aria-hidden="true">→</span></a><a class="btn btn--ghost" href="projects.html">Back to all projects</a></div>`
                 }
               </section>
             </div>
