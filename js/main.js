@@ -169,7 +169,7 @@
     const page = document.body.dataset.page;
     const header = document.getElementById("hud");
     if (header) {
-      const sub = page === "projects" ? `${esc(me.location)} · M.S. 2027 · ${P0().length} projects` : `${esc(me.title)} · ${esc(me.location)}`;
+      const sub = page === "projects" ? `${esc(me.location)} · M.S. 2027 · ${P0().length} projects` : `M.S. in UX Research & Design · May 2027`;
       if (page === "home") {
         header.innerHTML = `
         <a class="skip" href="#main">Skip to content</a>
@@ -192,7 +192,7 @@
           <a class="sg-brand" href="index.html" aria-label="${esc(me.firstName)} ${esc(me.lastName)}, home"><span>${esc(me.firstName.toUpperCase())}</span><span>${esc(me.lastName.toUpperCase())}</span></a>
           <a class="sg-event" href="index.html">
             <span class="sg-av" aria-hidden="true">LC</span>
-            <span class="sg-et"><b>${esc(me.firstName)} ${esc(me.lastName)}: ${esc(me.heroTitle)}</b><small>${sub}</small></span>
+            <span class="sg-et"><b><span class="sg-long">${esc(me.firstName)} ${esc(me.lastName)}: </span>${esc(me.heroTitle)}</b><small><span class="sg-long">${sub}</span><span class="sg-short">M.S. · May 2027</span></small></span>
           </a>
           <a class="sg-std-link sg-std-link--nav" href="https://layilahnasser.github.io/layilahcportfolio2026-/" title="A more traditional version of this portfolio">Classic portfolio <span aria-hidden="true">↗</span></a>
           <div class="sg-right">
