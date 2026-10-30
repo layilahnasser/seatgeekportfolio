@@ -212,183 +212,43 @@
 
     about() {
       const A = P.about;
-      const pill = (t) => `<span class="frame-pill">${t}</span>`;
+      const row = (left, sub, title, text) => `<li><div class="ab-d">${esc(left)}${sub ? `<small>${esc(sub)}</small>` : ""}</div><div><p class="ab-t">${esc(title)}</p>${text ? `<p class="ab-x">${esc(text)}</p>` : ""}</div></li>`;
+      const short = (x) => x.replace("Master of Science in ", "M.S. ").replace("Bachelor of Arts in ", "B.A. ");
       return `
-        <section class="page-head page-head--split">
-          <div>
-            <p class="eyebrow">About Me · ${esc(A.kicker)}</p>
-            <h1>${esc(A.title)} <span class="h1-sub">(${esc(A.pronunciation)})</span></h1>
-            <p class="lede lede--big">${esc(A.lede)}</p>
-          </div>
-          ${portrait({ cls: "player-card--about", header: A.card.header, title: A.card.title, lines: A.card.lines, photo: A.card.photo, alt: A.card.photoAlt })}
-        </section>
-
-        <section class="section path-section" aria-labelledby="path-title">
-          ${pill("My path")}
-          <h2 id="path-title" class="h-md">${esc(A.path.heading)}</h2>
-          <p class="path-lead">${esc(A.path.lead)}</p>
-          <blockquote class="path-quote"><p>${esc(A.path.quote)}</p></blockquote>
-          <p class="path-bridge">${esc(A.path.bridge)}</p>
-          <div class="jmap-wrap">
-            <ol class="jmap" style="--n:${A.path.steps.length}" aria-label="My path into UX, in order">
-              <li class="jline" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
-                <defs><linearGradient id="jmapG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#ff2fb4"/><stop offset="1" stop-color="#27d9f5"/></linearGradient></defs>
-                <polyline points="${A.path.steps.map((_, i) => `${(100 / (A.path.steps.length * 2)) * (2 * i + 1)},${i % 2 === 0 ? 30 : 70}`).join(" ")}" fill="none" stroke="url(#jmapG)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-              </svg></li>
-              ${A.path.steps
-                .map((st, i) => {
-                  const up = i % 2 === 0;
-                  return `<li class="jstep jstep--${up ? "up" : "down"}${i === A.path.steps.length - 1 ? " jstep--now" : ""}" style="--i:${i + 1}">
-                    <div class="jcard"><h3>${esc(st.label)}</h3><p class="jorg">${esc(st.org)}</p><p>${esc(st.text)}</p></div>
-                    <div class="jmark"><i class="jdot" aria-hidden="true"><b>${i + 1}</b></i></div>
-                  </li>`;
-                })
-                .join("")}
-            </ol>
-          </div>
-          <p class="path-turn">${esc(A.path.turn)}</p>
-          <p class="path-extra">${esc(A.path.extra)}</p>
-        </section>
-
-        <section class="section" aria-labelledby="how-title">
-          ${pill("Skills")}
-          <h2 id="how-title" class="h-md">${esc(A.toolsHeading)}</h2>
-          <ul class="tool-row" aria-label="Tools I use">${A.tools.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
-          <div class="cap-grid">
-            ${A.capabilities.map((c) => `<article class="cap"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p></article>`).join("")}
-          </div>
-          ${A.accessNote ? `<article class="a11y-note" id="accessibility" aria-labelledby="a11y-title"><h3 id="a11y-title">${esc(A.accessNote.title)}</h3><p>${esc(A.accessNote.text)}</p><ul>${A.accessNote.points.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></article>` : ""}
-        </section>
-
-        <section class="section" aria-labelledby="edu-title">
-          ${pill("Education")}
-          <h2 id="edu-title" class="h-md">${esc(A.educationHeading)}</h2>
-          <div class="edu-grid">
-            ${A.education
-              .map((e) => `<article class="edu"><h3>${esc(e.school)}</h3><p class="edu-program">${esc(e.program)}</p><p>${esc(e.text)}</p></article>`)
-              .join("")}
-          </div>
-        </section>
-
-        <section class="section" aria-labelledby="more-title">
-          ${pill("Beyond UX")}
-          <h2 id="more-title" class="h-md">${esc(A.moreHeading)}</h2>
-          <div class="more-grid">
-            ${A.more
-              .map((m) => `<article class="more"><p class="more-v">${esc(m.value)}</p><h3>${esc(m.title)}</h3><p>${esc(m.text)}</p></article>`)
-              .join("")}
-          </div>
-          <article class="league">
-            <figure class="league-photo"><img src="${esc(A.league.image.src)}" alt="${esc(A.league.image.alt)}" width="536" height="524" loading="lazy"></figure>
-            <div class="league-body">
-                            <h3>${esc(A.league.title)}</h3>
-              <p>${esc(A.league.text)}</p>
-              ${A.league.tie ? `<p class="league-tie">${esc(A.league.tie)}</p>` : ""}
+        <section class="ab-hero" aria-labelledby="ab-h1">
+          <div class="ab-in ab-hw">
+            <div>
+              <p class="ab-eb">About me</p>
+              <h1 id="ab-h1">${esc(A.title)}</h1>
+              <p class="ab-lede">${esc(A.lede)}</p>
             </div>
-          </article>
+            <img src="${esc(A.card.photo)}" alt="${esc(A.card.photoAlt)}" width="260" height="300">
+          </div>
         </section>
-
-        <section class="section cta-band">
-          <p>Want to talk about research, design, or a role?</p>
-          <div class="cta-actions">
-            <a class="btn btn--ghost" href="contact.html">Get in touch</a>
-            <a class="btn btn--pink" href="projects.html">See my work</a>
+        <div class="ab-in ab-body">
+          <nav class="ab-pills" aria-label="On this page"><a href="#path" class="is-on" aria-current="true">My path</a><a href="#skills">Skills</a><a href="#edu">Education</a><a href="#more">Beyond UX</a></nav>
+          <div class="ab-grid">
+            <div>
+              <h2 class="ab-h" id="path">${esc(A.path.heading)}</h2>
+              <ol class="ab-rows">${A.path.steps.map((st, i) => row(`Step ${i + 1}`, st.org, st.label, st.text)).join("")}</ol>
+              <h2 class="ab-h" id="skills">${esc(A.toolsHeading)}</h2>
+              <ul class="tool-row" aria-label="Tools I use">${A.tools.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
+              <div class="cap-grid">${A.capabilities.map((c) => `<article class="cap"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p></article>`).join("")}</div>
+              <h2 class="ab-h" id="edu">${esc(A.educationHeading)}</h2>
+              <ol class="ab-rows">${A.education.map((e) => row(short(e.program.split("·")[0].trim()), e.program.split("·")[1] ? e.program.split("·")[1].trim() : "", e.school, e.text)).join("")}</ol>
+              <h2 class="ab-h" id="more">${esc(A.moreHeading)}</h2>
+              <ol class="ab-rows">${A.more.map((m) => row(m.value, "", m.title, m.text)).join("")}</ol>
+              <article class="league">
+                <figure class="league-photo"><img src="${esc(A.league.image.src)}" alt="${esc(A.league.image.alt)}" width="536" height="524" loading="lazy"></figure>
+                <div class="league-body"><h3>${esc(A.league.title)}</h3><p>${esc(A.league.text)}</p>${A.league.tie ? `<p class="league-tie">${esc(A.league.tie)}</p>` : ""}</div>
+              </article>
+            </div>
+            <aside class="ab-side" aria-label="At a glance">
+              <div><i aria-hidden="true">&#10003;</i><b>${esc(me.status || "Open to opportunities")}</b><p>UX research and design, with an AI-product focus.</p></div>
+              <div><i aria-hidden="true">7</i><b>Years in tech</b><p>Recruiting at Google, Adobe &amp; Meta, now an M.S. at the University of Michigan, May 2027.</p></div>
+            </aside>
           </div>
-        </section>`;
-    },
-
-    work() {
-      return `
-        <section class="page-head">
-          <p class="eyebrow">My Work</p>
-          <h1>Selected work</h1>
-          <p class="lede">Explore my UX research and design work. See how I turn questions into insights and insights into better experiences.</p>
-        </section>
-        <section class="section" aria-label="Case studies">
-          <h2 class="work-label">Featured projects</h2>
-          <div class="rack rack--featured">
-            ${P.projects
-              .slice(0, 3)
-              .map(
-                (p, i) => `
-              <a class="rack-card" href="project.html?p=${esc(p.id)}" style="--ball:${esc(p.ballColor)}">
-                <div class="rack-media" aria-hidden="true">${(p.hero?.src || p.hero?.row?.[0]?.src) ? `<img src="${esc(p.hero.src || p.hero.row[0].src)}" alt="" loading="lazy"${(p.hero.row || ["phone", "phones"].includes(p.hero.fit)) ? ' class="rack-img--contain"' : ""}>` : ""}</div>
-                <div class="rack-body">
-                  <div class="rack-head">
-                    <span class="rack-ballwrap" aria-hidden="true"><span class="rack-ball"></span><b class="rack-num">${i + 1}</b></span>
-                    <div>
-                      <p class="rack-lane">Project ${i + 1}${p.year ? " · " + esc(p.year) : ""}</p>
-                      <h3>${t(p.title)}</h3>
-                    </div>
-                  </div>
-                  <p>${t(p.summary || p.subtitle)}</p>
-                  <span class="rack-go">View case study <span aria-hidden="true">→</span></span>
-                </div>
-              </a>`
-              )
-              .join("")}
-          </div>
-          <h2 class="work-label work-label--more">More research</h2>
-          <div class="work-rows">
-            ${P.projects
-              .slice(3)
-              .map(
-                (p, k) => `
-              <a class="work-row" href="project.html?p=${esc(p.id)}" style="--ball:${esc(p.ballColor)}">
-                <div class="work-row-img" aria-hidden="true">${p.hero?.src ? `<img src="${esc(p.hero.src)}" alt="" loading="lazy">` : ""}</div>
-                <div class="work-row-tx">
-                  <span class="rack-ballwrap" aria-hidden="true"><span class="rack-ball"></span><b class="rack-num">${k + 4}</b></span>
-                  <div>
-                    <p class="rack-lane">Project ${k + 4}${p.year ? " · " + esc(p.year) : ""}</p>
-                    <h3>${t(p.title)}</h3>
-                    <p>${t(p.summary || p.subtitle)}</p>
-                  </div>
-                </div>
-                <span class="work-row-go">View <span aria-hidden="true">→</span></span>
-              </a>`
-              )
-              .join("")}
-          </div>
-        </section>`;
-    },
-
-    resume() {
-      const R = P.resume;
-      const item = (x) => `<li>
-          <div class="tl-head"><h3>${t(x.role)}</h3><span class="tl-dates">${t(x.dates)}</span></div>
-          <p class="tl-org">${t(x.org)}</p>
-          <ul>${x.points.map((pt) => `<li>${t(pt)}</li>`).join("")}</ul>
-        </li>`;
-      return `
-        <section class="page-head page-head--row">
-          <div>
-            <p class="eyebrow">Resume</p>
-            <h1>Resume</h1>
-            <p class="lede">${t(R.summary)}</p>
-          </div>
-          <a class="btn btn--pink" href="${esc(me.resumePdf)}" download>Download PDF</a>
-        </section>
-        <section class="section resume-grid">
-          <div>
-            ${R.sections.map((s) => `<h2 class="h-sm">${esc(s.title)}</h2><ol class="timeline">${s.items.map(item).join("")}</ol>`).join("")}
-            <h2 class="h-sm">Education</h2>
-            <ol class="timeline">
-              ${R.education
-                .map(
-                  (e) => `<li><div class="tl-head"><h3>${t(e.degree)}</h3><span class="tl-dates">${t(e.dates)}</span></div><p class="tl-org">${t(e.school)}${e.detail ? ` · ${esc(e.detail)}` : ""}</p></li>`
-                )
-                .join("")}
-            </ol>
-          </div>
-          <aside class="skills" aria-label="Skills and coursework">
-            <h2 class="h-sm">Skills &amp; tools</h2>
-            ${Object.entries(R.skills)
-              .map(([k, list]) => `<div class="skill-block"><h3>${esc(k)}</h3><ul class="tags">${list.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></div>`)
-              .join("")}
-            <h2 class="h-sm h-sm--gap">Coursework</h2>
-            <ul class="tags">${R.coursework.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
-          </aside>
-        </section>`;
+        </div>`;
     },
 
     contact() {
