@@ -1412,3 +1412,4 @@ body[data-page="home"] .fp-embed, body[data-page="home"] .fp-proc { position: re
 @media (max-width: 520px) { .sg-et .sg-long { display: none; } .sg-et .sg-short { display: inline; } }
 @media (max-width: 520px) { .sg-bar:not(.sg-bar--front) .sg-right .sg-ic[aria-label="Search all projects"] { display: none; } .sg-et b { font-size: .88rem; } .sg-et small { font-size: .8rem; } }
 @media (max-width: 520px) { .sg-av { display: none; } .sg-event { padding-left: 14px; } }
+.sg-bar--front .sg-right { margin-left: auto; }
