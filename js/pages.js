@@ -278,6 +278,45 @@
         </div>`;
     },
 
+    resume() {
+      const R = P.resume;
+      const item = (x) => `<li>
+          <div class="tl-head"><h3>${t(x.role)}</h3><span class="tl-dates">${t(x.dates)}</span></div>
+          <p class="tl-org">${t(x.org)}</p>
+          <ul>${x.points.map((pt) => `<li>${t(pt)}</li>`).join("")}</ul>
+        </li>`;
+      return `
+        <section class="page-head page-head--row">
+          <div>
+            <p class="eyebrow">Resume</p>
+            <h1>Resume</h1>
+            <p class="lede">${t(R.summary)}</p>
+          </div>
+          <a class="btn btn--pink" href="${esc(me.resumePdf)}" download>Download PDF</a>
+        </section>
+        <section class="section resume-grid">
+          <div>
+            ${R.sections.map((s) => `<h2 class="h-sm">${esc(s.title)}</h2><ol class="timeline">${s.items.map(item).join("")}</ol>`).join("")}
+            <h2 class="h-sm">Education</h2>
+            <ol class="timeline">
+              ${R.education
+                .map(
+                  (e) => `<li><div class="tl-head"><h3>${t(e.degree)}</h3><span class="tl-dates">${t(e.dates)}</span></div><p class="tl-org">${t(e.school)}${e.detail ? ` · ${esc(e.detail)}` : ""}</p></li>`
+                )
+                .join("")}
+            </ol>
+          </div>
+          <aside class="skills" aria-label="Skills and coursework">
+            <h2 class="h-sm">Skills &amp; tools</h2>
+            ${Object.entries(R.skills)
+              .map(([k, list]) => `<div class="skill-block"><h3>${esc(k)}</h3><ul class="tags">${list.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></div>`)
+              .join("")}
+            <h2 class="h-sm h-sm--gap">Coursework</h2>
+            <ul class="tags">${R.coursework.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
+          </aside>
+        </section>`;
+    },
+
     contact() {
       const rows = [
         me.email && ["Email", `<a href="mailto:${esc(me.email)}">${esc(me.email)}</a>`],
