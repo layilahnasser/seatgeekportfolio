@@ -1404,3 +1404,6 @@ body[data-page="home"] .fp-embed, body[data-page="home"] .fp-proc { position: re
 .sg-modal-card p { margin: 0 0 24px; font: 500 1.08rem/1.55 "Manrope", sans-serif; color: #566074; }
 .sg-modal-ok { width: 100%; min-height: 56px; border-radius: 12px; background: #000; font-size: 1.1rem; }
 .sg-modal-x { all: unset; box-sizing: border-box; position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: #fff; color: #0b1220; cursor: pointer; z-index: 2; } .sg-modal-x svg { width: 22px; height: 22px; } .sg-modal-x:hover { background: #f1f2f6; } .sg-modal-x:focus-visible { outline: 3px solid #0b1220; outline-offset: 2px; box-shadow: 0 0 0 5px #fff; }
+
+.glance-boxes--2 { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 700px) { .glance-boxes--2 { grid-template-columns: 1fr; } }
