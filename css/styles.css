@@ -1387,3 +1387,4 @@ body[data-page="about"] main > .path-section { margin-top: 10px; }
 body[data-page="about"] main > .ab-navw { margin-bottom: 0; }
 
 body[data-page="about"] .ab-grid { grid-template-columns: minmax(0, 1fr); }
+.comp-table caption { padding: 12px 0 8px 18px; }
