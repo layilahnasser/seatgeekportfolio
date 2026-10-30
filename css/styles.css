@@ -1388,3 +1388,10 @@ body[data-page="about"] main > .ab-navw { margin-bottom: 0; }
 
 body[data-page="about"] .ab-grid { grid-template-columns: minmax(0, 1fr); }
 .comp-table caption { padding: 12px 0 8px 18px; }
+
+/* header: solid as soon as the page scrolls, so hero text never shows through it */
+body[data-page="home"].is-stuck .hud { background: #1c0204; box-shadow: 0 1px 0 rgba(255,255,255,.1); }
+body[data-page="home"].is-light .hud { background: #fff; box-shadow: 0 1px 0 var(--sg-line); }
+/* search suggestions sit above the sections below the hero */
+.fp-hero { z-index: 20; }
+body[data-page="home"] .fp-embed, body[data-page="home"] .fp-proc { position: relative; z-index: 1; }

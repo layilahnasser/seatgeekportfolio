@@ -245,7 +245,7 @@
   }
   function scrollTheme() {
     if (document.body.dataset.page !== "home") return;
-    const flip = () => { const hero = document.getElementById("fp-hero"); if (hero) document.body.classList.toggle("is-light", hero.getBoundingClientRect().bottom <= 90); };
+    const flip = () => { const hero = document.getElementById("fp-hero"); document.body.classList.toggle("is-stuck", window.scrollY > 8); if (hero) document.body.classList.toggle("is-light", hero.getBoundingClientRect().bottom <= 90); };
     window.addEventListener("scroll", flip, { passive: true }); window.addEventListener("resize", flip); flip();
   }
   function buyBar() {
