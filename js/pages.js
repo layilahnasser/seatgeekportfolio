@@ -270,10 +270,6 @@
                 <div class="league-body"><h3>${esc(A.league.title)}</h3><p>${esc(A.league.text)}</p>${A.league.tie ? `<p class="league-tie">${esc(A.league.tie)}</p>` : ""}</div>
               </article>
             </div>
-            <aside class="ab-side" aria-label="At a glance">
-              <div><i aria-hidden="true">&#10003;</i><b>${esc(me.status || "Open to opportunities")}</b><p>UX research and design, with an AI-product focus.</p></div>
-              <div><i aria-hidden="true">7</i><b>Years in tech</b><p>Recruiting at Google, Adobe &amp; Meta, now an M.S. at the University of Michigan, May 2027.</p></div>
-            </aside>
           </div>
         </div>`;
     },
