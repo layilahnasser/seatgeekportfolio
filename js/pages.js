@@ -151,7 +151,7 @@
           <span class="sg-thumb" aria-hidden="true">${cover(p) ? `<img src="${esc(cover(p))}" alt="" loading="lazy">` : ""}<i class="sg-m">LC</i></span>
           <div class="sg-main">
             <h2 class="sg-t"><a href="project.html?p=${esc(p.id)}">${t(p.title)}</a></h2>
-            <p class="sg-meta">${esc(p.focus)} · ${esc(p.timeline || p.year || "")} <span class="sg-bolt" title="Full case study" aria-hidden="true">${bolt}</span></p>
+            <p class="sg-meta">${esc(p.focus)} · ${esc(p.timeline || p.year || "")} ${m.ai ? `<span class="sg-bolt" title="AI-assisted"><span aria-hidden="true">${bolt}</span><span class="sr-only">AI-assisted</span></span>` : ""}</p>
             <p class="sg-pain"><b>${esc(FRAME[p.id] || "")}.</b> ${PAIN[p.id] || t((p.glance || {}).problem || "")}</p>
             <p class="sg-tags">${m.badge[0] ? `<span class="sg-badge"><b>${esc(m.badge[0])}</b>${esc(m.badge[1])}</span>` : ""}${(p.tags || []).slice(0, 2).map((x) => `<span class="sg-tag">${esc(x)}</span>`).join("")}</p>
           </div>
