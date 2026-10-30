@@ -1383,3 +1383,5 @@ body[data-page="about"] main > .ab-body { margin-inline: auto; }
 .ab-side i { grid-row: span 2; width: 40px; height: 40px; border-radius: 50%; background: #e6f4ea; color: var(--sg-green); display: grid; place-items: center; font: 800 1.1rem "Manrope", sans-serif; font-style: normal; }
 .ab-side b { font: 800 1.05rem "Manrope", sans-serif; color: var(--sg-ink); } .ab-side p { margin: 4px 0 0; font: 500 .98rem/1.5 "Manrope", sans-serif; color: var(--sg-gray); }
 @media (max-width: 900px) { .ab-grid { grid-template-columns: 1fr; gap: 0; } .ab-side { position: static; margin-top: 20px; } .ab-rows li { grid-template-columns: 1fr; gap: 6px; } .ab-hero { padding: 56px 0 36px; } .ab-hw img { display: none; } }
+body[data-page="about"] main > .path-section { margin-top: 10px; }
+body[data-page="about"] main > .ab-navw { margin-bottom: 0; }

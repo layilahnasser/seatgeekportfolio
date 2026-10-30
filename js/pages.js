@@ -212,6 +212,7 @@
 
     about() {
       const A = P.about;
+      const pill = (t) => `<span class="frame-pill">${t}</span>`;
       const row = (left, sub, title, text) => `<li><div class="ab-d">${esc(left)}${sub ? `<small>${esc(sub)}</small>` : ""}</div><div><p class="ab-t">${esc(title)}</p>${text ? `<p class="ab-x">${esc(text)}</p>` : ""}</div></li>`;
       const short = (x) => x.replace("Master of Science in ", "M.S. ").replace("Bachelor of Arts in ", "B.A. ");
       return `
@@ -225,12 +226,38 @@
             <img src="${esc(A.card.photo)}" alt="${esc(A.card.photoAlt)}" width="260" height="300">
           </div>
         </section>
+        <div class="ab-in ab-navw">
+          <nav class="ab-pills" aria-label="On this page"><a href="#path-title" class="is-on" aria-current="true">My path</a><a href="#skills">Skills</a><a href="#edu">Education</a><a href="#more">Beyond UX</a></nav>
+        </div>
+        <section class="section path-section ab-in" aria-labelledby="path-title">
+          ${pill("My path")}
+          <h2 id="path-title" class="h-md">${esc(A.path.heading)}</h2>
+          <p class="path-lead">${esc(A.path.lead)}</p>
+          <blockquote class="path-quote"><p>${esc(A.path.quote)}</p></blockquote>
+          <p class="path-bridge">${esc(A.path.bridge)}</p>
+          <div class="jmap-wrap">
+            <ol class="jmap" style="--n:${A.path.steps.length}" aria-label="My path into UX, in order">
+              <li class="jline" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none" focusable="false">
+                <defs><linearGradient id="jmapG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#ff2fb4"/><stop offset="1" stop-color="#27d9f5"/></linearGradient></defs>
+                <polyline points="${A.path.steps.map((_, i) => `${(100 / (A.path.steps.length * 2)) * (2 * i + 1)},${i % 2 === 0 ? 30 : 70}`).join(" ")}" fill="none" stroke="url(#jmapG)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+              </svg></li>
+              ${A.path.steps
+                .map((st, i) => {
+                  const up = i % 2 === 0;
+                  return `<li class="jstep jstep--${up ? "up" : "down"}${i === A.path.steps.length - 1 ? " jstep--now" : ""}" style="--i:${i + 1}">
+                    <div class="jcard"><h3>${esc(st.label)}</h3><p class="jorg">${esc(st.org)}</p><p>${esc(st.text)}</p></div>
+                    <div class="jmark"><i class="jdot" aria-hidden="true"><b>${i + 1}</b></i></div>
+                  </li>`;
+                })
+                .join("")}
+            </ol>
+          </div>
+          <p class="path-turn">${esc(A.path.turn)}</p>
+          <p class="path-extra">${esc(A.path.extra)}</p>
+        </section>
         <div class="ab-in ab-body">
-          <nav class="ab-pills" aria-label="On this page"><a href="#path" class="is-on" aria-current="true">My path</a><a href="#skills">Skills</a><a href="#edu">Education</a><a href="#more">Beyond UX</a></nav>
           <div class="ab-grid">
             <div>
-              <h2 class="ab-h" id="path">${esc(A.path.heading)}</h2>
-              <ol class="ab-rows">${A.path.steps.map((st, i) => row(`Step ${i + 1}`, st.org, st.label, st.text)).join("")}</ol>
               <h2 class="ab-h" id="skills">${esc(A.toolsHeading)}</h2>
               <ul class="tool-row" aria-label="Tools I use">${A.tools.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
               <div class="cap-grid">${A.capabilities.map((c) => `<article class="cap"><h3>${esc(c.title)}</h3><p>${esc(c.text)}</p></article>`).join("")}</div>
