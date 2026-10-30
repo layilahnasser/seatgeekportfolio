@@ -555,7 +555,7 @@
             </div>
             ${img(p.hero, "shot--hero" + (p.hero && p.hero.fit === "phone" ? " shot--phone" : ""))}
             
-            ${p.glance ? `<ul class="glance-boxes${p.id === "crown-code" ? " glance-boxes--2" : ""}" aria-label="Case study at a glance">${[["Problem", p.glance.problem], ["What I did", p.glance.did], ["What changed", p.glance.changed]].filter(([k]) => !(p.id === "crown-code" && k === "Problem")).map(([k, v]) => `<li><b>${k}</b><span>${t(v)}</span></li>`).join("")}</ul>` : ""}
+            ${p.glance ? `<ul class="glance-boxes${" glance-boxes--2"}" aria-label="Case study at a glance">${[["Problem", p.glance.problem], ["What I did", p.glance.did], ["What changed", p.glance.changed]].filter(([k]) => k !== "Problem").map(([k, v]) => `<li><b>${k}</b><span>${t(v)}</span></li>`).join("")}</ul>` : ""}
           </header>
 
           <nav class="fstrip-nav" aria-label="Case study frames"><span class="fprog" id="fprog" aria-hidden="true"></span>
