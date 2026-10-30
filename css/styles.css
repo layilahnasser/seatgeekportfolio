@@ -1288,3 +1288,5 @@ body[data-page="project"] { padding-bottom: 76px; }
 .sg-modal-card h2 { margin: 0 0 10px; font: 800 1.4rem "Manrope", sans-serif; color: var(--sg-ink); text-shadow: none; }
 .sg-modal-card p { margin: 0 0 22px; font: 500 1.05rem/1.55 "Manrope", sans-serif; color: #263043; }
 .sg-modal-ok { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 30px; border-radius: 999px; background: var(--sg-ink); color: #fff; font: 700 1.02rem "Manrope", sans-serif; } .sg-modal-ok:hover { background: #263043; } .sg-modal-ok:focus-visible { outline: 3px solid var(--sg-blue); outline-offset: 3px; }
+
+.is-solo .sg-std-link, .is-solo .sg-std, .is-solo .sg-std-foot { display: none !important; }

@@ -219,7 +219,7 @@
             ${me.email ? `<a href="mailto:${esc(me.email)}">Email</a>` : ""}
             ${me.linkedin ? `<a href="${esc(me.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
             <a href="resume.html">Resume</a>
-            <a href="https://layilahnasser.github.io/layilahcportfolio2026-/">Classic portfolio</a>
+            <a class="sg-std-foot" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Classic portfolio</a>
           </p>
         </div>`;
     }
@@ -263,6 +263,11 @@
   function P0() { return window.PORTFOLIO.projects; }
 
   window.LANES = { esc, t, isTodo, plain, img, ballSVG, logo, portrait };
+  (function solo() {
+    let on = /[?&]solo\b/.test(location.search);
+    try { if (on) sessionStorage.setItem("sg-solo", "1"); else on = sessionStorage.getItem("sg-solo") === "1"; } catch (e) {}
+    if (on) document.documentElement.classList.add("is-solo");
+  })();
   renderChrome();
   scrollTheme();
   buyBar();
