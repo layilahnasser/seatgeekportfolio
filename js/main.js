@@ -176,13 +176,13 @@
         <div class="sg-bar sg-bar--front">
           <a class="sg-brand sg-brand--red" href="index.html" aria-label="${esc(me.firstName)} ${esc(me.lastName)}, home"><span>${esc(me.firstName.toUpperCase())}</span><span>${esc(me.lastName.toUpperCase())}</span></a>
           <nav class="sg-links" aria-label="Sections"><a href="projects.html?f=research">Research</a><a href="projects.html?f=design">Design</a><a href="about.html">About</a><a href="resume.html">Resume</a></nav>
-          <a class="sg-std-link" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio <span aria-hidden="true">↗</span></a>
+          <a class="sg-std-link" href="https://layilahnasser.github.io/layilahcportfolio2026-/" title="A more traditional version of this portfolio">Classic portfolio <span aria-hidden="true">↗</span></a>
           <div class="sg-right">
             <a class="sg-pill" href="contact.html">Contact</a>
             <button type="button" class="sg-ic" id="sg-menu-btn" aria-expanded="false" aria-controls="sg-menu" aria-label="Menu">${SG.menu}</button>
           </div>
           <nav class="sg-menu" id="sg-menu" aria-label="Main" hidden>
-            <ul><li><a class="sg-std" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio ↗</a></li>${NAV.map((n) => `<li><a href="${n.href}"${page === n.key ? ' aria-current="page"' : ""}>${n.label}</a></li>`).join("")}</ul>
+            <ul><li><a class="sg-std" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Classic portfolio ↗</a></li>${NAV.map((n) => `<li><a href="${n.href}"${page === n.key ? ' aria-current="page"' : ""}>${n.label}</a></li>`).join("")}</ul>
           </nav>
         </div>`;
       } else
@@ -194,7 +194,7 @@
             <span class="sg-av" aria-hidden="true">LC</span>
             <span class="sg-et"><b>${esc(me.firstName)} ${esc(me.lastName)}: ${esc(me.heroTitle)}</b><small>${sub}</small></span>
           </a>
-          <a class="sg-std-link sg-std-link--nav" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio <span aria-hidden="true">↗</span></a>
+          <a class="sg-std-link sg-std-link--nav" href="https://layilahnasser.github.io/layilahcportfolio2026-/" title="A more traditional version of this portfolio">Classic portfolio <span aria-hidden="true">↗</span></a>
           <div class="sg-right">
             <a class="sg-ic" href="projects.html" aria-label="Search all projects">${SG.search}</a>
             <a class="sg-pill${page === "contact" ? " is-active" : ""}" href="contact.html"${page === "contact" ? ' aria-current="page"' : ""}>Contact</a>
@@ -219,7 +219,7 @@
             ${me.email ? `<a href="mailto:${esc(me.email)}">Email</a>` : ""}
             ${me.linkedin ? `<a href="${esc(me.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
             <a href="resume.html">Resume</a>
-            <a href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio</a>
+            <a href="https://layilahnasser.github.io/layilahcportfolio2026-/">Classic portfolio</a>
           </p>
         </div>`;
     }
