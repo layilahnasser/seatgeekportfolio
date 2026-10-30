@@ -122,16 +122,11 @@
           <ul class="fp-chips" aria-label="Suggested questions">${QS.map(([q, k]) => `<li><button type="button" class="fp-chip" data-k="${k}"><span class="fp-sp">${spark}</span>${esc(q)}</button></li>`).join("")}</ul>
           <section class="fp-answer" id="fp-answer" aria-live="polite" tabindex="-1" hidden></section>
           </div>
-          <section class="fp-trust" aria-label="At a glance">
-            <div><span class="fp-ti" aria-hidden="true">${"&#10003;"}</span><b>Every project is a full case study</b><p>From the first question to final designs, with the research behind each decision.</p></div>
-            <div><span class="fp-ti" aria-hidden="true">7</span><b>Years in tech</b><p>Now finishing an M.S. at the University of Michigan School of Information, May 2027.</p></div>
-          </section>
-
-          <section class="fp-proc" aria-labelledby="proc-t"><h2 id="proc-t">How I work, step by step</h2><ol class="fp-steps" id="fp-steps">${STEPS.map((st, i) => `<li class="${i === 0 ? "is-on" : ""}"><button type="button" data-i="${i}" aria-expanded="${i === 0}"><span class="fp-dot">${i + 1}</span><span class="fp-lbl">${st[0]}</span></button></li>`).join("")}</ol><div class="fp-pan" aria-live="polite"><b id="fp-ph">${STEPS[0][0]}</b><p id="fp-pp">${STEPS[0][1]}</p></div></section>
           <section class="fp-embed" aria-labelledby="seat-t">
             <h2 class="fp-embed-h" id="seat-t">Pick your seat</h2>
             ${pages.projects().replace(/<aside class="sg-notify"[\s\S]*?<\/aside>/, "")}
           </section>
+          <section class="fp-proc" aria-labelledby="proc-t"><h2 id="proc-t">How I work, step by step</h2><ol class="fp-steps" id="fp-steps">${STEPS.map((st, i) => `<li class="${i === 0 ? "is-on" : ""}"><button type="button" data-i="${i}" aria-expanded="${i === 0}"><span class="fp-dot">${i + 1}</span><span class="fp-lbl">${st[0]}</span></button></li>`).join("")}</ol><div class="fp-pan" aria-live="polite"><b id="fp-ph">${STEPS[0][0]}</b><p id="fp-pp">${STEPS[0][1]}</p></div></section>
           <p class="sr-only" id="fp-live" role="status" aria-live="polite"></p>
         </div>`;
     },
