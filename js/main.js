@@ -232,13 +232,17 @@
     const n = document.createElement("div");
     n.className = "sg-modal";
     n.innerHTML = `<div class="sg-modal-card" role="dialog" aria-modal="true" aria-labelledby="sg-modal-t" tabindex="-1">
-      <h2 id="sg-modal-t">Before you look around</h2>
-      <p>Visual style inspired by SeatGeek’s app. Independent project; not affiliated with SeatGeek.</p>
-      <button type="button" class="sg-modal-ok">Got it</button></div>`;
-    const card = n.firstElementChild, ok = n.querySelector("button");
+      <button type="button" class="sg-modal-x" aria-label="Close">${'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>'}</button>
+      <div class="sg-modal-art" aria-hidden="true"><svg viewBox="0 0 200 140"><circle cx="100" cy="70" r="46" fill="rgba(255,255,255,.14)"/><circle cx="100" cy="70" r="30" fill="#fff"/><rect x="95" y="62" width="10" height="26" rx="5" fill="#b22a1c"/><circle cx="100" cy="52" r="6" fill="#b22a1c"/><circle cx="34" cy="38" r="6" fill="rgba(255,255,255,.55)"/><circle cx="168" cy="102" r="5" fill="rgba(255,255,255,.55)"/><path d="M150 30l5 10 10 5-10 5-5 10-5-10-10-5 10-5z" fill="rgba(255,255,255,.7)"/><path d="M40 104l4 8 8 4-8 4-4 8-4-8-8-4 8-4z" fill="rgba(255,255,255,.55)"/></svg></div>
+      <div class="sg-modal-body">
+        <h2 id="sg-modal-t">Before you look around</h2>
+        <p>Visual style inspired by SeatGeek’s app. Independent project; not affiliated with SeatGeek.</p>
+        <button type="button" class="sg-modal-ok">Got it</button>
+      </div></div>`;
+    const card = n.firstElementChild, ok = n.querySelector(".sg-modal-ok"), xb = n.querySelector(".sg-modal-x");
     const off = () => { n.remove(); document.removeEventListener("keydown", key); if (prev && prev.focus) prev.focus(); };
-    const key = (e) => { if (e.key === "Escape") off(); else if (e.key === "Tab") { e.preventDefault(); ok.focus(); } };
-    ok.addEventListener("click", off);
+    const key = (e) => { if (e.key === "Escape") off(); else if (e.key === "Tab") { e.preventDefault(); (document.activeElement === ok ? xb : ok).focus(); } };
+    ok.addEventListener("click", off); xb.addEventListener("click", off);
     n.addEventListener("click", (e) => { if (e.target === n) off(); });
     document.addEventListener("keydown", key);
     document.body.appendChild(n); ok.focus();
